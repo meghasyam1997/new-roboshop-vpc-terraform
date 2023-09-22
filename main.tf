@@ -31,7 +31,7 @@ module "apps" {
   tags         = local.tags
 }
 
-module "apps" {
+module "docdb" {
   source = "git::https://github.com/meghasyam1997/new-tf-module-docdb.git"
 
   for_each = var.docdb

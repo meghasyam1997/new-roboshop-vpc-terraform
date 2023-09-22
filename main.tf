@@ -30,3 +30,23 @@ module "apps" {
   bastion_cidr = var.bastion_cidr
   tags         = local.tags
 }
+
+module "apps" {
+  source = "git::https://github.com/meghasyam1997/new-tf-module-docdb.git"
+
+  for_each = var.docdb
+  engine_version = each.value["engine_version"]
+  instance_count = each.value["instance_count"]
+  instance_class = each.value["instance_class"]
+
+  subnet_ids     = lookup(lookup(lookup(lookup(module.vpc, "main", null), "subnets", null), each.value["subnet_name"], null), "subnets_ids", null)
+  allow_app_cidr = lookup(lookup(lookup(lookup(module.vpc, "main", null), "subnets", null), each.value["allow_app_cidr"], null), "subnet_cidrs", null)
+
+  env = var.env
+  tags = local.tags
+  kms_arn = var.kms_arn
+  vpc_id = local.vpc_id
+}
+
+
+

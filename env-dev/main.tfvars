@@ -47,7 +47,43 @@ apps = {
     component_name = "catalogue"
     instance_type = "t3.small"
     subnet_name = "app"
-    allow_app_cidr = "web"
+    allow_app_cidr = "app"
+    desired_capacity = 2
+    max_size = 10
+    min_size = 2
+  }
+  cart = {
+    component_name = "cart"
+    instance_type = "t3.small"
+    subnet_name = "app"
+    allow_app_cidr = "app"
+    desired_capacity = 2
+    max_size = 10
+    min_size = 2
+  }
+  shipping = {
+    component_name = "shipping"
+    instance_type = "t3.small"
+    subnet_name = "app"
+    allow_app_cidr = "app"
+    desired_capacity = 2
+    max_size = 10
+    min_size = 2
+  }
+  payment = {
+    component_name = "payment"
+    instance_type = "t3.small"
+    subnet_name = "app"
+    allow_app_cidr = "app"
+    desired_capacity = 2
+    max_size = 10
+    min_size = 2
+  }
+  user = {
+    component_name = "user"
+    instance_type = "t3.small"
+    subnet_name = "app"
+    allow_app_cidr = "app"
     desired_capacity = 2
     max_size = 10
     min_size = 2

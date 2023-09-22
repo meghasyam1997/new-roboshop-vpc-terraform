@@ -82,3 +82,19 @@ module "elasticache" {
   tags    = local.tags
   kms_arn = var.kms_arn
 }
+
+module "rabbitmq" {
+  source = "git::https://github.com/meghasyam1997/new-tf-module-amazon-mq.git"
+
+  for_each      = var.rabbitmq
+  instance_type = each.value["instance_type"]
+
+  subnets       = lookup(lookup(lookup(lookup(module.vpc, "main", null), "subnets", null), each.value["subnet_name"], null), "subnets_ids", null)
+  allow_db_cidr = lookup(lookup(lookup(lookup(module.vpc, "main", null), "subnets", null), each.value["allow_db_cidr"], null), "subnet_cidrs", null)
+
+  env          = var.env
+  tags         = local.tags
+  bastion_cidr = var.bastion_cidr
+  vpc_id       = local.vpc_id
+  kms_arn      = var.kms_arn
+}
